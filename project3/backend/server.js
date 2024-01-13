@@ -8,6 +8,7 @@ var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var daycardRouter = require('./routes/daycard');
+var journalentryRouter = require('./routes/journalentry');
 
 require("dotenv").config();
 require("./client/mongo");
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use('/daycard', daycardRouter);
+app.use('/journal', journalentryRouter);
 
 
 app.use('/', indexRouter);

@@ -14,3 +14,8 @@ router.post("/create-card", cardController.createCardID); // add this route
 
 
 module.exports = router;
+
+//to test on postman
+// {
+//     "date": "2024-01-15"
+// }

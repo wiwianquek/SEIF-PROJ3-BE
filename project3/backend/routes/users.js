@@ -14,3 +14,12 @@ router.post("/create", userController.createUser); // add this route
 
 
 module.exports = router;
+
+//to test on postman
+// {
+//     "first_name": "John",
+//     "last_name": "Doe",
+//     "username": "john.doe",
+//     "email": "johndoe@example.com",
+//     "password": "aSecurePassword123"
+// }
