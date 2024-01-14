@@ -11,6 +11,14 @@ const journalEntrySchema = new Schema({
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'CardID'
     },
+    entry_title: {
+      type: String,
+      required: true,
+    },
+    entry_description: {
+      type: String,
+      required: true,
+    },
     entry_text: {
       type: String,
       required: true,
