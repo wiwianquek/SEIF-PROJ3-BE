@@ -1,15 +1,24 @@
-const daoJournal = require("../daos/journalentry")
+const JournalEntry = require("../daos/journalentry");
 
 module.exports = {
-    getJournalEntry,
-    createJournalEntry
-  };
+  getJournalEntry,
+  getJournalEntryById,
+  createJournalEntry,
+};
 
+// This function will return a promise that resolves to the list of entries that match the query fields
 function getJournalEntry(queryFields) {
-    return daoJournal.find(queryFields);
+    return JournalEntry.find(queryFields);
 }
 
-function createJournalEntry(journalentry) {
-    //
-    return daoJournal.create(journalentry);
-  }
+// This function will return a promise that resolves to the journal entry object that was created
+function createJournalEntry(journalEntryData) {
+    return JournalEntry.create(journalEntryData);
+}
+
+// This function will return a promise that resolves to the journal entry object with the specified ID
+function getJournalEntryById(id) {
+    return JournalEntry.findById(id);
+}
+
+
