@@ -10,3 +10,13 @@ router.post("/create-journal-entry", journalController.createJournalEntry);
 
 module.exports = router;
 
+//to test on postman
+// {
+//     "user_id": "65a677619646798d1980e068",
+//     "card_id": "65a6aa0d2302804f074118af",
+//     "entry_title": "testing FIRSTTTT for foreign key",
+//     "entry_description": "test test test",
+//     "entry_text": "testingggg",
+//     "date": "2024-01-16"
+//   }
+  
