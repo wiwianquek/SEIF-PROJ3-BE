@@ -1,4 +1,5 @@
 const modelJournalEntry = require("../models/journalentry");
+const modelDayCards = require("../models/daycard");
 
 module.exports = {
     getJournalEntry,
@@ -22,13 +23,15 @@ async function getJournalEntry(req, res) {
 
 async function createJournalEntry(req, res) {
     try {
-        // Call the function from the model
+        // Create the journal entry
         const journalEntry = await modelJournalEntry.createJournalEntry(req.body);
+
+        // Update the corresponding day card to reflect the journalentry_id
+        await modelDayCards.updateDayCardWithJournalEntry(journalEntry._id, req.body.card_id);
+
         res.status(201).json(journalEntry);
     } catch (err) {
         console.error(err);
         res.status(500).json({ errorMsg: err.message });
     }
 }
-
-
