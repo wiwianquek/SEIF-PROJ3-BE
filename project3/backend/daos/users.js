@@ -13,11 +13,11 @@ const userSchema = new Schema({
         // highlight-next-line
         required: true,
       },  
-    username: {
-        type: String,
-        // highlight-next-line
-        required: true,
-      },    
+    // username: {
+    //     type: String,
+    //     // highlight-next-line
+    //     required: true,
+    //   },    
     email: {
         type: String,
         required: true,
@@ -26,6 +26,14 @@ const userSchema = new Schema({
         type: String,
         required: true,
       }, 
+    salt: {
+        type: String,
+        required: true,
+      },
+    iterations: {
+        type: Number,
+        required: true,
+      },
   }, {
     timestamps: true
   });
