@@ -31,6 +31,7 @@ async function getLoginDetails(req, res) {
 }
 
 async function loginUser(req, res) {
+  // console.log(req.body);
   try {
       const token = await modelUsers.loginUser(req.body);
       console.log(token);
@@ -40,6 +41,7 @@ async function loginUser(req, res) {
       }
       res.json(token.data)
   } catch (err) {
+    console.log (err);
       res.status(500).json({ errorMsg: err.message });
   }
 }
@@ -57,7 +59,6 @@ async function createUser(req, res) {
   } catch (err) {
     // Typically some sort of validation error
     console.log(err);
-    
     res.status(500).json({ errorMsg: err.message });
   }
 }

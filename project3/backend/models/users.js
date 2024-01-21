@@ -52,7 +52,13 @@ async function loginUser(body) {
   return {success: true, data: token}
 }
 
-function createUser(user) {
+async function createUser(body) {
     //
-    return daoUser.create(user);
+    const user = await daoUser.findOne({"email": body.email});
+    console.log(user);
+    if (user) {
+      return {success: false, error: "user already exist"};
+    }
+    const newUser = await daoUser.create(body);
+    return {success: true, data: newUser};
   }
