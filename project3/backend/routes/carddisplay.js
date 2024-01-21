@@ -1,0 +1,13 @@
+var express = require('express');
+var cardController = require('../controllers/carddisplay')
+
+var router = express.Router();
+
+// Get cards for current month 
+router.get("/get-cards", cardController.getCards);
+
+// Get cards for specific month (mm-yyyy)
+router.get("/get-cards/:month", cardController.getCards);
+
+
+
