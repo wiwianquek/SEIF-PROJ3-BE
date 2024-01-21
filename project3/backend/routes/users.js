@@ -10,6 +10,11 @@ var router = express.Router();
 // });
 
 router.get("/", userController.getUsers);
+
+router.get("/", securityMiddleware.checkPermission, userController.getUsers);
+router.get("/login", userController.getLoginDetails);
+router.post("/login", userController.loginUser);
+
 router.post("/create-user", userController.createUser); // add this route
 
 
