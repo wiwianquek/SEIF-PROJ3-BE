@@ -13,11 +13,6 @@ const userSchema = new Schema({
         // highlight-next-line
         required: true,
       },  
-    // username: {
-    //     type: String,
-    //     // highlight-next-line
-    //     required: true,
-    //   },    
     email: {
         type: String,
         required: true,
@@ -34,6 +29,16 @@ const userSchema = new Schema({
         type: Number,
         required: true,
       },
+    token: {
+      type: String
+    },
+    expire_at: {
+      type: Number
+    },
+    is_admin: {
+      type: Boolean,
+      default: false
+    }
   }, {
     timestamps: true
   });
