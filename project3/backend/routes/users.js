@@ -1,5 +1,6 @@
 var express = require('express');
 var userController = require('../controllers/users')
+var securityMiddleware = require('../middlewares/security')
 
 var router = express.Router();
 
