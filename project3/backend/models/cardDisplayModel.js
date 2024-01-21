@@ -1,22 +1,20 @@
-const cardDisplay = require("../daos/carddisplay");
-
+//this model will have the business logic for the card display page
 module.exports = {
     getCards,
     getCardID,
     createCardID
 }
 
-// This function will return a promise that resolves to the list of entries that match the query fields
-function getCards(queryFields) {
-    return cardDisplay.find(queryFields);
+function getCards() {
+    // TODO: Implement logic to get all cards
 }
 
-// This function will return a promise that resolves to the journal entry object that was created
-function createCardID(cardData) {
-    return cardDisplay.create(cardData);
-}
-
-// This function will return a promise that resolves to the journal entry object with the specified ID
 function getCardID(id) {
-    return cardDisplay.findById(id);
+    // TODO: Implement logic to get card by ID
 }
+
+function createCardID(card) {
+    // TODO: Implement logic to create a new card with ID
+}
+
+
