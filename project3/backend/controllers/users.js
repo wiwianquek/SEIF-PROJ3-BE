@@ -31,10 +31,9 @@ async function getLoginDetails(req, res) {
 }
 
 async function loginUser(req, res) {
-  // console.log(req.body);
+  
   try {
       const token = await modelUsers.loginUser(req.body);
-      console.log(token);
       if (!token.success) {
         res.status(400).json({errorMsg: token.error})
         return 

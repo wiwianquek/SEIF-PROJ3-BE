@@ -29,6 +29,7 @@ async function getLoginDetails(queryFields) {
 }
 
 async function loginUser(body) {
+  console.log(process.env.SECRET)
   if (!body.hasOwnProperty("email")) {
     return {success: false, error: "missing email"};
   }
