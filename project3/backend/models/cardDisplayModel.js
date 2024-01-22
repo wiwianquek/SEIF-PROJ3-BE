@@ -6,7 +6,7 @@ module.exports = {
 }
 
 function getCards() {
-    // TODO: Implement logic to get all cards
+    // TODO: Implement logic to generate all cards for the current month
 }
 
 function getCardID(id) {
