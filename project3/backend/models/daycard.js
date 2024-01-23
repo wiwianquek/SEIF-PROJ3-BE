@@ -6,9 +6,14 @@ module.exports = {
     updateDayCardWithJournalEntry
   };
 
+// function getCardID(queryFields) {
+//     return daoCard.find(queryFields);
+// }
+// In models/daycard.js
 function getCardID(queryFields) {
-    return daoCard.find(queryFields);
+  return daoCard.findOne(queryFields);
 }
+
 
 function  createCardID(card) {
     return daoCard.create(card);
