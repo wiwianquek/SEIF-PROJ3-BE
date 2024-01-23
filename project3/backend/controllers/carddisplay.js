@@ -56,6 +56,7 @@ async function getCards(req, res) {
     //     - the quote for the day in the specified frequency
     //     - the journal entry if it exists | To get from dayCard controller?
 
+
     try {
         // const cardData = await cardDisplayModel.getCards(req.query);
         res.json({cards: displayCards, quotes: quotes, monthArray: monthArray})
