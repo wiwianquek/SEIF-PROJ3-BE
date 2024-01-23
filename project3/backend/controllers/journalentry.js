@@ -3,7 +3,10 @@ const modelDayCards = require("../models/daycard");
 
 module.exports = {
     getJournalEntry,
-    createJournalEntry
+    createJournalEntry,
+    getJournalEntriesByMonth, 
+    getJournalEntriesByUser,
+    getAllJournalEntries    
 };
 
 async function getJournalEntry(req, res) {
@@ -35,3 +38,38 @@ async function createJournalEntry(req, res) {
         res.status(500).json({ errorMsg: err.message });
     }
 }
+
+async function getJournalEntriesByMonth(req, res) {
+    try {
+        const month = req.params.month;
+        const year = req.query.year || new Date().getFullYear(); // Optionally allow a year to be specified
+        const journalEntries = await modelJournalEntry.getJournalEntriesByMonth(month, year);
+        res.json(journalEntries);
+    } catch (err) {
+        console.error(err); 
+        res.status(500).json({ errorMsg: err.message });
+    }
+}
+
+async function getJournalEntriesByUser(req, res) {
+    try {
+        const userId = req.params.userId;
+        const journalEntries = await modelJournalEntry.getJournalEntriesByUser(userId);
+        res.json(journalEntries);
+    } catch (err) {
+        console.error(err); 
+        res.status(500).json({ errorMsg: err.message });
+    }
+}
+
+async function getAllJournalEntries(req, res) {
+    try {
+        const filter = req.query || {};
+        const journalEntries = await modelJournalEntry.getAllJournalEntries(filter);
+        res.json(journalEntries);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ errorMsg: err.message });
+    }
+}
+
