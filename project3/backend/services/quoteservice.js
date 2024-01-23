@@ -1,7 +1,6 @@
 //service to fetch quotes for the month
 
 const axios = require('axios');
-const config = require('../config/config');
 const common = require('../util/common');
 
 module.exports = {
@@ -14,10 +13,21 @@ async function getQuotes(month, year, frequency) {
     const quotesToFetch = Math.ceil(daysInMonth / frequency);
     const quotes = [];
     for (let i = 0; i < quotesToFetch; i++) {
-        const quote = await getQuote();
+        const quote =  await getQuote();
         quotes.push(quote);
     }
     return quotes;
 }
 
+//fetch quote from https://api.quotable.io/random
+async function getQuote() {
+    try {
+        // To have the url in config eventually
+        const quote = await axios.get("https://api.quotable.io/random");
+        return quote.data.content;
+    } catch (err) {
+        // Handle error
+        throw err;
+    }
+}
 

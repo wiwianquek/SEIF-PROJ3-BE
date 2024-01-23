@@ -26,12 +26,8 @@ async function getCards(req, res) {
 
     //Get all the required data from services
     const quotesToFetch = Math.ceil(daysInMonth / quotesFrequency);
-    const quotes = [];
-    for (let i = 0; i < quotesToFetch; i++) {
-        const quote = await getQuotes.getQuote();
-        quotes.push(quote);
-    }
-
+    const quotes = await getQuotes.getQuotes(month, year, quotesFrequency);
+    
     let card = {
         card_id: '',
         card_name: '',
