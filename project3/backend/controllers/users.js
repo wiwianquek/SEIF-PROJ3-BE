@@ -4,6 +4,7 @@ const modelUsers = require("../models/users")
 module.exports = {
     getUsers,
     getLoginDetails,
+    logoutUser,
     loginUser,
     createUser
 }
@@ -38,12 +39,22 @@ async function loginUser(req, res) {
         res.status(400).json({errorMsg: token.error})
         return 
       }
+      console.log (token.data)
       res.json(token.data)
   } catch (err) {
     console.log (err);
       res.status(500).json({ errorMsg: err.message });
   }
 }
+
+async function logoutUser(req, res) {
+  try {
+    const userData = await modelUsers.logoutUser(req.body);
+    res.json(userData);
+  } catch (err) {
+    res.status(500).json({ errorMsg: err.message });
+  }
+} 
 
 
 async function createUser(req, res) {

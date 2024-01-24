@@ -6,6 +6,7 @@ module.exports = {
     getUsers,
     getLoginDetails,
     loginUser,
+    logoutUser,
     createUser
   };
 
@@ -63,3 +64,11 @@ async function createUser(body) {
     const newUser = await daoUser.create(body);
     return {success: true, data: newUser};
   }
+
+async function logoutUser(body) {
+  if (!body.hasOwnProperty("email")) {
+    return {success: false, error: "missing email"};
+  }
+  daoUser.updateOne({"email": body.email}, {token: null, expire_at: null})
+  return {success: true, data: "logout success"}
+}

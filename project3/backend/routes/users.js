@@ -18,6 +18,8 @@ router.post("/login", userController.loginUser);
 
 router.post("/create-user", userController.createUser); // add this route
 
+router.post("/logout", securityMiddleware.checkPermission, userController.logoutUser);
+
 
 module.exports = router;
 
