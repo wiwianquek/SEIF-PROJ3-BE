@@ -39,7 +39,7 @@ async function loginUser(req, res) {
         res.status(400).json({errorMsg: token.error})
         return 
       }
-      console.log (token.data)
+      // console.log (token.data)
       res.json(token.data)
   } catch (err) {
     console.log (err);
