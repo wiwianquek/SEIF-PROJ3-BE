@@ -11,7 +11,7 @@ module.exports = {
 }
 
 async function getCards(req, res) {
-    console.log(req.user);
+    // console.log(req.user);
 
     const displayCards = [];
 
@@ -32,21 +32,26 @@ async function getCards(req, res) {
 
     //Get all the journal entries for the user, ideally we want to optimise by only fetching the entries for the month
     //However, the MVP is to fetch all the entries for the user for now
-    const journalEntries = await modelJournalEntry.getJournalEntries(req.user._id);
-    
+    const journalEntries = await modelJournalEntry.getJournalEntryByUserId(req.user.payload.userId);
     console.log(journalEntries);
 
     //Generate the array of cards to display
     for (let i = 0; i < daysInMonth; i++) {
-        const card={
+        let newCard = {
             cardType: "day",
             dayNo: monthArray[i].dayNo,
             dayName: monthArray[i].dayName,
             date: monthArray[i].date,
-        }
-        displayCards.push(card);
+            journal: null
+        };
+        const journalEntry = journalEntries.find(entry => entry.date == newCard.date);
+        newCard.journal = journalEntry;
+        
+        displayCards.push(newCard);
 
     }
+
+    console.log(displayCards);
 
     // //insert journal entries into the array of cards
     // displayCards.forEach(card => {
