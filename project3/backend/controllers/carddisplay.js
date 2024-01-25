@@ -28,16 +28,30 @@ async function getCards(req, res) {
     const quotesToFetch = Math.ceil(daysInMonth / quotesFrequency);
     const quotes = await getQuotes.getQuotes(month, year, quotesFrequency);
 
+    //Get all the journal entries for the month
+    // const journalEntries = await modelDayCards.getJournalEntriesByMonth(month, year);
+    // console.log(journalEntries);
+
+
     //Generate the array of cards to display
     for (let i = 0; i < daysInMonth; i++) {
         const card={
             cardType: "day",
             dayNo: monthArray[i].dayNo,
             dayName: monthArray[i].dayName,
+            date: monthArray[i].date,
         }
         displayCards.push(card);
 
     }
+
+    // //insert journal entries into the array of cards
+    // displayCards.forEach(card => {
+    //     //Fetch the journal entry for the day
+    //     const journalEntry = journalEntries.find(entry => entry.date == card.date);
+    // })
+
+
     //insert quotes based on frequency
     let quoteIndex = 0;
     for (let i = 0; i < daysInMonth; i++) {
@@ -51,7 +65,8 @@ async function getCards(req, res) {
         }
     }
 
-    //TODO Ben:Append journal/todo entries to the cards via the daycard model
+    
+
 
     try {
         // const cardData = await cardDisplayModel.getCards(req.query);

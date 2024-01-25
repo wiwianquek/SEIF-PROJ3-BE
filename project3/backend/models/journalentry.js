@@ -23,8 +23,8 @@ function getJournalEntryById(id) {
     return JournalEntry.findById(id);
 }
 
-// Get journal entry by user and date
-function getJournalEntryByUserAndDate(user_id, date) {
+// Get journal entry by date
+function getJournalEntryByDate(user_id, date) {
     return JournalEntry.find({user_id: user_id, date: date});
 }
 
