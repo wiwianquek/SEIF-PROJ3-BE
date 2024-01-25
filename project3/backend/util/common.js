@@ -14,7 +14,8 @@ function getDaysOfMonth(month, year) {
         const date = new Date(year, month - 1, day);
         const dayNo = date.getDate();
         const dayName = dayNames[date.getDay()];
-        daysArray.push({ dayNo: dayNo, dayName: dayName });
+        const dateStr = date.toISOString().split('T')[0];
+        daysArray.push({ dayNo: dayNo, dayName: dayName, date: dateStr});
     }
 
     return daysArray;
