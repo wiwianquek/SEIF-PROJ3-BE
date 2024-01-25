@@ -44,7 +44,7 @@ async function getCards(req, res) {
             date: monthArray[i].date,
             journal: null
         };
-        const journalEntry = journalEntries.find(entry => entry.date == newCard.date);
+        const journalEntry = journalEntries.find(entry => entry.date.toISOString().split('T')[0] == newCard.date);
         newCard.journal = journalEntry;
         
         displayCards.push(newCard);
