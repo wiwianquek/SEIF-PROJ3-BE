@@ -23,9 +23,8 @@ function getJournalEntryById(id) {
     return JournalEntry.findById(id);
 }
 
-// This function will return a promise that resolves to the list of entries that match the query fields
-function getJournalEntryByDate(date) {
-    return JournalEntry.find({ date: date });
+// Get journal entry by user and date
+function getJournalEntryByUserAndDate(user_id, date) {
+    return JournalEntry.find({user_id: user_id, date: date});
 }
-
 
