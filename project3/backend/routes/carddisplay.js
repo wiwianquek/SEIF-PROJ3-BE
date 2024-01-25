@@ -1,5 +1,7 @@
 var express = require('express');
 var cardController = require('../controllers/carddisplay')
+var securityMiddleware = require('../middlewares/security')
+
 
 var router = express.Router();
 
@@ -7,7 +9,7 @@ var router = express.Router();
 // router.get("/get-cards", cardController.getCards);
 
 // Get cards for specific month (mm-yyyy)
-router.get("/get-cards/:month/:year", cardController.getCards);
+router.get("/get-cards/:month/:year",securityMiddleware.checkJWT, cardController.getCards);
 
 module.exports = router;
 

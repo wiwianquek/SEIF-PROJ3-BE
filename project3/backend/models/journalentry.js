@@ -13,6 +13,7 @@ function getJournalEntry(queryFields) {
 
 // This function will return a promise that resolves to the journal entry object that was created
 function createJournalEntry(journalEntryData) {
+    console.log(journalEntryData);
     return JournalEntry.create(journalEntryData);
 }
 

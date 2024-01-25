@@ -6,7 +6,10 @@ module.exports = {
     getUsers,
     getLoginDetails,
     loginUser,
-    createUser
+    logoutUser,
+    createUser,
+    returnUserIDbyEmail,
+    returnEmailbyUserID,
   };
 
 function getUsers(queryFields) {
@@ -63,3 +66,24 @@ async function createUser(body) {
     const newUser = await daoUser.create(body);
     return {success: true, data: newUser};
   }
+
+async function logoutUser(body) {
+  if (!body.hasOwnProperty("email")) {
+    return {success: false, error: "missing email"};
+  }
+  daoUser.updateOne({"email": body.email}, {token: null, expire_at: null})
+  return {success: true, data: "logout success"}
+}
+
+//return userid | added this function so that we can use it in the create journal function
+async function returnUserIDbyEmail(body){
+  const user = await daoUser.findOne({"email": body.payload.email});
+  return user._id;
+  
+}
+
+async function returnEmailbyUserID(userID){
+  const user = await daoUser.findOne({"_id": userID})
+  return user.email; 
+  
+} 
