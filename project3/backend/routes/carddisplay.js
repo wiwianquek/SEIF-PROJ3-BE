@@ -9,7 +9,7 @@ var router = express.Router();
 // router.get("/get-cards", cardController.getCards);
 
 // Get cards for specific month (mm-yyyy)
-router.get("/get-cards/:month/:year", cardController.getCards);
+router.get("/get-cards/:month/:year",securityMiddleware.checkJWT, cardController.getCards);
 
 module.exports = router;
 

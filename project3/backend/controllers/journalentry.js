@@ -5,39 +5,8 @@ const modelUser = require("../models/users");
 
 module.exports = {
     getJournalEntry,
-    createJournalEntry,
-    getJournalEntryByDate,
+    createJournalEntry
 };
-
-//getJournalEntryByDate
-async function getJournalEntryByDate(req, res) {
-    try {
-        const journalEntry = await modelJournalEntry.getJournalEntryByDate(req.params.date);
-        if (!journalEntry) {
-            return res.status(404).send('Entry not found');
-        }
-        res.json(journalEntry);
-    } catch (err) {
-        console.error(err); 
-        res.status(500).json({ errorMsg: err.message });
-    }
-}
-
-//getJournalEntryByMonthYear
-async function getJournalEntryByMonthYear(req, res) {
-    try {
-        const journalEntry = await modelJournalEntry.getJournalEntryByMonthYear(req.params.month, req.params.year);
-        if (!journalEntry) {
-            return res.status(404).send('Entry not found');
-        }
-        res.json(journalEntry);
-    } catch (err) {
-        console.error(err); 
-        res.status(500).json({ errorMsg: err.message });
-    }
-}
-
-
 
 async function getJournalEntry(req, res) {
 

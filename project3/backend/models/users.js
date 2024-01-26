@@ -47,11 +47,9 @@ async function loginUser(body) {
   
   const jwtPayload = {
     user: user.name,
-    userId: user._id,
     email: user.email,
     is_admin: user.is_admin
   };
-  console.log(jwtPayload)
   const token = utilSecurity.createJWT(jwtPayload);
   const expiry = utilSecurity.getExpiry(token);
   daoUser.updateOne({"email": body.email}, {token: token, expire_at: expiry})

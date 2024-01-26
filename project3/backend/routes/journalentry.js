@@ -5,9 +5,9 @@ var securityMiddleware = require('../middlewares/security')
 var router = express.Router();
 
 //TODO: Remember to add middleware to check JWT permission
-router.get("/:entryId",securityMiddleware.checkPermission, journalController.getJournalEntry); // Specific entry by ID
-router.get("/", securityMiddleware.checkPermission, journalController.getJournalEntry); // General search or get all entries
-router.post("/create-journal-entry", securityMiddleware.checkPermission, journalController.createJournalEntry);
+router.get("/:entryId", journalController.getJournalEntry); // Specific entry by ID
+router.get("/", journalController.getJournalEntry); // General search or get all entries
+router.post("/create-journal-entry", securityMiddleware.checkJWT, journalController.createJournalEntry);
 
 
 module.exports = router;
