@@ -1,4 +1,6 @@
 const utilSecurity = require("../util/security")
+const modelUser = require("../models/users");
+
 
 module.exports = {
     checkJWT,
@@ -10,15 +12,18 @@ function checkJWT(req, res, next) {
     // Check for the token being sent in a header or as a query parameter
     // console.log(req)
     let token = req.get("Authorization") || req.query.token;
-    token = token.replace("Bearer ", "");
+   
     // console.log(token)
     if (token) {
+        token = token.replace("Bearer ", "");
         req.user = utilSecurity.verifyJWT(token);
-        console.log(req.user);
+        
     } else {
       // No token was sent
       req.user = null;
     }
+
+   
     return next();
   };
   

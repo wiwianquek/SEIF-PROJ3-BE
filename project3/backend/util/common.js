@@ -1,5 +1,7 @@
 //Common functions
 
+const { off } = require("../server");
+
 module.exports = {
     getDaysOfMonth,
 }
@@ -11,10 +13,11 @@ function getDaysOfMonth(month, year) {
     const daysArray = [];
 
     for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month - 1, day);
+        const date = new Date(year, month - 1, day); // Add 1 to the day to offset the date
         const dayNo = date.getDate();
         const dayName = dayNames[date.getDay()];
-        daysArray.push({ dayNo: dayNo, dayName: dayName });
+        const dateStr = new Date(year, month - 1, day+1).toISOString().split('T')[0];
+        daysArray.push({ dayNo: dayNo, dayName: dayName, date: dateStr});
     }
 
     return daysArray;
