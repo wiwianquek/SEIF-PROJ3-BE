@@ -6,19 +6,22 @@ var logger = require('morgan');
 var cors = require('cors');
 var securityMiddleware = require('./middlewares/security');
 
-
+// Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var daycardRouter = require('./routes/daycard');
 var journalentryRouter = require('./routes/journalentry');
 var carddisplayRouter = require('./routes/carddisplay');
 
+// Load environment variables
 require("dotenv").config();
+
+// Connect to MongoDB or any database you use
 require("./client/mongo");
 
 var app = express();
 
-// view engine setup
+// View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -27,34 +30,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
+
+// CORS Middleware setup
+app.use(cors({ origin: 'https://elysio.vercel.app' })); // Enable CORS for the frontend app
+
+// Security middleware, if it's used for checking JWT it should be after CORS setup
 app.use(securityMiddleware.checkJWT);
 
+// Routes
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 app.use('/daycard', daycardRouter);
 app.use('/journal', journalentryRouter);
 app.use('/carddisplay', carddisplayRouter);
 
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-// catch 404 and forward to error handler
+// Catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// Error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-  res.locals.title = 'Error'; // Define the title for the error page
 
-  // render the error page
+  // Render the error page
   res.status(err.status || 500);
   res.render('error');
 });
 
-
 module.exports = app;
-
