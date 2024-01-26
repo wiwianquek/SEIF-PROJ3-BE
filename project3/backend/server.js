@@ -34,6 +34,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // CORS Middleware setup
 app.use(cors({ origin: 'https://elysio.vercel.app' })); // Enable CORS for the frontend app
 
+// Enable preflight requests for all routes
+app.options('*', cors({ origin: 'https://elysio.vercel.app' })); // This handles preflight requests
+
 // Security middleware, if it's used for checking JWT it should be after CORS setup
 app.use(securityMiddleware.checkJWT);
 
