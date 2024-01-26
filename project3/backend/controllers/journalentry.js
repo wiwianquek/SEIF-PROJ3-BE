@@ -7,6 +7,8 @@ module.exports = {
     getJournalEntry,
     createJournalEntry,
     getJournalEntryByDate,
+    updateJournalEntry,
+    deleteJournalEntry,
 };
 
 //getJournalEntryByDate
@@ -74,6 +76,26 @@ async function createJournalEntry(req, res) {
         res.status(201).json(journalEntry);
     } catch (err) {
         console.error(err);
+        res.status(500).json({ errorMsg: err.message });
+    }
+}
+
+// Update a journal entry
+async function updateJournalEntry(req, res) {
+    try {
+        const updatedEntry = await modelJournalEntry.updateJournalEntry(req.params.entryId, req.body);
+        res.json(updatedEntry);
+    } catch (err) {
+        res.status(500).json({ errorMsg: err.message });
+    }
+}
+
+// Delete a journal entry
+async function deleteJournalEntry(req, res) {
+    try {
+        await modelJournalEntry.deleteJournalEntry(req.params.entryId);
+        res.status(204).send(); // 204 No Content
+    } catch (err) {
         res.status(500).json({ errorMsg: err.message });
     }
 }

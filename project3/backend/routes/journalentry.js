@@ -8,6 +8,10 @@ var router = express.Router();
 router.get("/:entryId",securityMiddleware.checkPermission, journalController.getJournalEntry); // Specific entry by ID
 router.get("/", securityMiddleware.checkPermission, journalController.getJournalEntry); // General search or get all entries
 router.post("/create-journal-entry", securityMiddleware.checkPermission, journalController.createJournalEntry);
+//delete journal entry by id
+router.put("/:entryId",securityMiddleware.checkPermission, journalController.updateJournalEntry);
+router.delete("/:entryId",securityMiddleware.checkPermission, journalController.deleteJournalEntry);
+
 
 
 module.exports = router;
