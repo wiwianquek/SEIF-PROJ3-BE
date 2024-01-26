@@ -21,6 +21,11 @@ require("./client/mongo");
 
 var app = express();
 
+const corsOptions = {
+  origin: 'https://elysio.vercel.app',
+  optionsSuccessStatus: 200 // For legacy browser support
+};
+
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -36,6 +41,9 @@ app.use(cors({ origin: 'https://elysio.vercel.app' })); // Enable CORS for the f
 
 // Enable preflight requests for all routes
 app.options('*', cors({ origin: 'https://elysio.vercel.app' })); // This handles preflight requests
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Security middleware, if it's used for checking JWT it should be after CORS setup
 app.use(securityMiddleware.checkJWT);
